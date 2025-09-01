@@ -48,7 +48,7 @@
                                     </span>
                     </button>
     
-                    <a  
+                    {{-- <a  
                         href="{{ route('courses.show', $course) }}" 
                         class="border-slate-200 hover:bg-white transition-all duration-150 flex items-center border border-solid text-slate-800 px-5 font-semibold py-2 rounded-lg gap-x-4">
                         <svg 
@@ -70,19 +70,25 @@
                         <span>
                             Guarda il video
                         </span>
-                    </a>
+                    </a> --}}
                 </div>
             </div>
     
-            <div class="lg:w-1/2">
+            <div class="lg:w-1/2 p-4">
                 @if($course->cover_path)
-                <img src="/{{ $course->cover_path }}" alt="{{ $course->title }}" class="max-w-[80%] object-cover">
-            @else
-                <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-                    <span class="text-gray-500">No Image</span>
-                </div>
-            @endif
-        </div>
+                    <img src="/{{ $course->cover_path }}" alt="{{ $course->title }}" class="max-w-[80%] object-cover">
+                @else
+                    <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                        <span class="text-gray-500">No Image</span>
+                    </div>
+                @endif
+
+                @if ($course->youtube_embed)
+                    <div class="mt-4">
+                        <iframe class="aspect-video" width="100%" src="{{ $course->youtube_embed }}" frameborder="0"></iframe>
+                    </div>
+                @endif
+            </div>
     
         </div>
     </div>
