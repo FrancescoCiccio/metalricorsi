@@ -76,7 +76,7 @@
     
             <div class="lg:w-1/2 p-4">
                 @if($course->cover_path)
-                    <img src="/{{ $course->cover_path }}" alt="{{ $course->title }}" class="max-w-[80%] object-cover">
+                    <img src="/storage/{{ $course->cover_path }}" alt="{{ $course->title }}" class="max-w-[80%] object-cover">
                 @else
                     <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
                         <span class="text-gray-500">No Image</span>

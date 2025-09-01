@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('courses', function (Blueprint $table) {
-            //
             $table->string('youtube_embed')->nullable()->after('description');
         });
     }
@@ -23,7 +22,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('courses', function (Blueprint $table) {
-            //
             $table->dropColumn(['youtube_embed']);
         });
     }
