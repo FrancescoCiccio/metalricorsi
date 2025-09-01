@@ -14,7 +14,9 @@ class Course extends Model
     use HasTags;
 
     protected $casts = [
-        'when' => 'datetime'
+        'when' => 'datetime',
+        'additional_resources' => 'array',
+        'relators' => 'array',
     ];
 
     /**

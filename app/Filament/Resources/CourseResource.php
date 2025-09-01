@@ -74,6 +74,55 @@ class CourseResource extends Resource
                             ->suffixIcon('heroicon-o-video-camera')
                             ->placeholder('https://www.youtube.com/embed/...')
                             ->columnSpanFull(),
+
+                        Forms\Components\Section::make('File addizionali')
+                            ->description('Aggiungi file aggiuntivi come PDF, documenti Word, ecc. Questi file saranno accessibili agli utenti iscritti al corso.')
+                            ->schema([
+                                Forms\Components\Repeater::make('additional_resources')
+                                    ->label('File addizionali')
+                                    ->columns(2)
+                                    ->schema([
+                                        Forms\Components\TextInput::make('name')
+                                            ->label('Nome File')
+                                            ->required()
+                                            ->rules('required|string|max:255'),
+
+                                        Forms\Components\FileUpload::make('file_path')
+                                            ->label('Carica File')
+                                            ->required()
+                                            ->rules('required|file|max:5120'),
+                                    ])
+                            ])
+                            ->columnSpanFull(),
+
+                        Forms\Components\Section::make('Relatori')
+                            ->description('Aggiungi i relatori del corso. Puoi inserire più relatori separandoli con una virgola.')
+                            ->schema([
+                                Forms\Components\Repeater::make('relators')
+                                    ->label('Relatori')
+                                    ->columns(1)
+                                    ->columnSpanFull()
+                                    ->schema([
+                                        Forms\Components\FileUpload::make('photo')
+                                            ->label('Foto Relatore')
+                                            ->image()
+                                            ->rules('nullable|image|max:1024')
+                                            ->columnSpanFull(),
+
+                                        Forms\Components\TextInput::make('name')
+                                            ->label('Nome Relatore')
+                                            ->required()
+                                            ->rules('required|string|max:255'),
+                                        Forms\Components\TextInput::make('bio')
+                                            ->label('Didascalia Relatore')
+                                            ->columnSpanFull()
+                                            ->rules('nullable|string'),
+                                    ])
+                                    ->minItems(0)
+                                    ->maxItems(5)
+                                    ->addActionLabel('Aggiungi Relatore')
+                                    ->columnSpanFull(),
+                            ]),
                     ])
             ]);
     }

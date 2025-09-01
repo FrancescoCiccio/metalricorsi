@@ -10,15 +10,15 @@
         
     
         <div class="flex flex-wrap">
-            <div class="w-full lg:w-1/2 flex flex-col gap-y-4">
+            <div class="w-full lg:w-1/2 flex flex-col gap-y-4 prose">
 
                 <flux:heading size="xl">
                     {{ $course->title }}
                 </flux:heading>
 
-                <flux:subheading>
+                <div class="prose max-w-none">
                     {!! $course->description !!}
-                </flux:subheading>
+                </div>
     
                 <div class="bg-white flex gap-x-4 rounded-lg border-slate-200 border-2 p-6">
                     <div class="flex gap-x-2 items-center text-slate-500">
@@ -89,8 +89,53 @@
                     </div>
                 @endif
             </div>
-    
         </div>
+
+        @if ($course->relators && count($course->relators) > 0)
+            <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg mt-10">
+                <flux:heading size="lg" class="mb-4">
+                    Relatori
+                </flux:heading>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @foreach ($course->relators as $relator)
+                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg ">
+                            <img src="/storage/{{ $relator['photo'] }}" alt="{{ $relator['name'] }}" class="w-full rounded-md">
+                            <h3 class="text-xl font-semibold mb-2">{{ $relator['name'] }}</h3>
+                            @if (!empty($relator['bio']))
+                                <p class="text-gray-600 dark:text-gray-300">{{ $relator['bio'] }}</p>
+                            @else
+                                <p class="text-gray-600 dark:text-gray-300">Nessuna biografia disponibile.</p>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
+        @if ($course->additional_resources)
+
+            <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg mt-10">
+                <flux:heading size="lg" class="mb-4">
+                    Risorse Aggiuntive
+                </flux:heading>
+
+                <div class="flex gap-x-4 flex-wrap">
+                    {{-- Loop through resources --}}
+                    @foreach ($course->additional_resources as $resource)
+                        <flux:button 
+                            href="/storage/{{ $resource['file_path'] }}"
+                            icon="arrow-down-on-square"
+                            target="_blank"
+                            download
+                            >
+                            {{ $resource['name'] }}
+                        </flux:button>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
     </div>
 
 </x-layouts.app>
