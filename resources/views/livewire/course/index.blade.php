@@ -52,6 +52,12 @@
                         class="border border-zinc-200 hover:border-zinc-200 border-b-zinc-300/80 dark:border-zinc-600 dark:hover:border-zinc-600 shadow-xs  rounded-lg overflow-hidden">
                         <!-- Course Info -->
                         <div class="p-6 flex items-start justify-start flex-col gap-y-2 h-full">
+                            
+                            <img 
+                                src="{{ $course->cover_path }}" 
+                                class="rounded-md bg-gray-50 max-h-32 w-full object-cover" 
+                                alt="">
+
                             <span class="bg-slate-800 text-white text-sm font-medium px-5 rounded-md py-1 ">
                                 {{ $course->location }}
                             </span>

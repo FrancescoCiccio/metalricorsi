@@ -16,6 +16,8 @@
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                     <flux:navlist.item icon="academic-cap" :href="route('courses.index')" :current="request()->routeIs('courses.index')" wire:navigate>{{ __('Corsi') }}</flux:navlist.item>
                     <flux:navlist.item icon="arrow-down-on-square" :href="route('downloads.index')" :current="request()->routeIs('downloads.index')" wire:navigate>{{ __('Downloads') }}</flux:navlist.item>
+                    <flux:navlist.item icon="video-camera" :href="route('videos.index')" :current="request()->routeIs('videos.index')" wire:navigate>{{ __('Video') }}</flux:navlist.item>
+
                 </flux:navlist.group>
             </flux:navlist>
 
