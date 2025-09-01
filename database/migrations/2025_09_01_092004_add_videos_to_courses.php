@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('courses', function (Blueprint $table) {
             //
-            $table->string('youtube_embed')->nullable()->after('video_path');
+            $table->string('youtube_embed')->nullable()->after('description');
         });
     }
 
