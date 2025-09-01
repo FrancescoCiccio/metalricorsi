@@ -64,7 +64,7 @@
                                 <flux:button 
                                     variant="primary"
                                     icon="arrow-down-tray"
-                                    href="{{ $download->file_path }}" target="_blank" class="w-full">Scarica</flux:button>
+                                    href="/storage/{{ $download->file_path }}" target="_blank" class="w-full">Scarica</flux:button>
                             </div>
                         </div>
                     @endforeach
