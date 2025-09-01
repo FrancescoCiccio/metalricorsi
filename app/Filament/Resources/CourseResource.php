@@ -67,7 +67,13 @@ class CourseResource extends Resource
                         Forms\Components\SpatieTagsInput::make('tags')
                             ->type('categories')
                             ->suggestions($courseTags)
-                            ->columnSpan(2)
+                            ->columnSpan(2),
+
+                        Forms\Components\TextInput::make('youtube_embed')
+                            ->label('YouTube Embed Link')
+                            ->suffixIcon('heroicon-o-video-camera')
+                            ->placeholder('https://www.youtube.com/embed/...')
+                            ->columnSpanFull(),
                     ])
             ]);
     }

@@ -13,7 +13,6 @@ class Course extends Model
     use HasFactory;
     use HasTags;
 
-
     protected $casts = [
         'when' => 'datetime'
     ];
