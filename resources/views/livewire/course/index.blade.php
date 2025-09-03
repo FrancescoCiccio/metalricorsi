@@ -54,7 +54,7 @@
                         <div class="p-6 flex items-start justify-start flex-col gap-y-2 h-full">
                             
                             <img 
-                                src="{{ $course->cover_path }}" 
+                                src="/storage/{{ $course->cover_path }}" 
                                 class="rounded-md bg-gray-50 max-h-32 w-full object-cover" 
                                 alt="">
 
