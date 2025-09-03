@@ -63,6 +63,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('Metal.Ri')
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->databaseNotifications();
     }
 }

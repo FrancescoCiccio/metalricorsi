@@ -10,7 +10,7 @@
         </flux:subheading>
     </div>
 
-    <div class="w-full flex space-2 gap-4 mt-10">
+    <div class="w-full flex flex-col lg:flex-row space-2 gap-4 mt-10">
 
         {{-- Sidebar --}}
         <div class="w-full md:w-1/4 rounded-lg">
@@ -39,7 +39,7 @@
         {{-- END Sidebar --}}
 
         {{-- Main Content --}}
-        <div class="w-full md:w-3/4">
+        <div class="w-full md:w-3/4 mt-4 lg:mt-0">
             @if($downloads->isEmpty())
                 <p class="text-gray-600 text-sm">Nessun download disponibile.</p>
             @else

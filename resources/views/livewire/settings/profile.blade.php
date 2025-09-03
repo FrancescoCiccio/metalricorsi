@@ -74,7 +74,7 @@ new class extends Component {
 
     <x-settings.layout :heading="__('Profilo')" :subheading="__('Aggiorna il tuo profilo')">
         <form wire:submit="updateProfileInformation" class="my-6 w-full space-y-6">
-            <flux:input wire:model="name" :label="__('Nome')" type="text" required autofocus autocomplete="name" />
+            <flux:input wire:model="name" :label="__('Nome e cognome')" type="text" required autofocus autocomplete="name" />
 
             <div>
                 <flux:input wire:model="email" :label="__('Email')" type="email" required autocomplete="email" />

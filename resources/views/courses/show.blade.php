@@ -33,44 +33,19 @@
                 </div>
     
                 <div class="flex gap-x-4">
-    
-                    <button
-                        class="bg-slate-800 hover:bg-slate-700 transition-all duration-150 text-white text-base font-medium px-5 py-2 rounded-md flex gap-x-4 items-center"
-                                    >
-    
-                                    <svg class="w-4 h-4" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M11.8334 1L4.50008 8.33333L1.16675 5" class="stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                        
-    
-                                    <span>
-                                        Iscriviti
-                                    </span>
-                    </button>
-    
-                    {{-- <a  
-                        href="{{ route('courses.show', $course) }}" 
-                        class="border-slate-200 hover:bg-white transition-all duration-150 flex items-center border border-solid text-slate-800 px-5 font-semibold py-2 rounded-lg gap-x-4">
-                        <svg 
-                            class="w-4 h-4" 
-                            viewBox="0 0 16 16" 
-                            fill="none" 
-                            xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_1133_373)">
-                            <path 
-                            d="M7.99992 14.6667C11.6818 14.6667 14.6666 11.6819 14.6666 8C14.6666 4.3181 11.6818 1.33333 7.99992 1.33333C4.31802 1.33333 1.33325 4.3181 1.33325 8C1.33325 11.6819 4.31802 14.6667 7.99992 14.6667Z" class="stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M6.66675 5.33333L10.6667 7.99999L6.66675 10.6667V5.33333Z" class="stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </g>
-                            <defs>
-                            <clipPath id="clip0_1133_373">
-                            <rect width="16" height="16" fill="white"/>
-                            </clipPath>
-                            </defs>
-                            </svg>                            
-                        <span>
-                            Guarda il video
-                        </span>
-                    </a> --}}
+                    @unless(now()->isAfter($course->when))
+                        <button
+                            class="bg-slate-800 hover:bg-slate-700 transition-all duration-150 text-white text-base font-medium px-5 py-2 rounded-md flex gap-x-4 items-center"
+                            >
+                            <svg class="w-4 h-4" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.8334 1L4.50008 8.33333L1.16675 5" class="stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                                
+                            <span>
+                                Iscriviti
+                            </span>
+                        </button>
+                    @endunless
                 </div>
             </div>
     

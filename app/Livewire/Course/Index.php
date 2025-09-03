@@ -62,6 +62,7 @@ class Index extends Component
         if ($user && !$user->courses()->where('courses.id', $courseId)->exists()) {
             $user->courses()->attach($courseId);
             $this->dispatch('courseSubscribed', $courseId);
+            $user->notify(new \App\Notifications\CourseJoinedNotification(Course::find($courseId), $user));
         }
     }
 

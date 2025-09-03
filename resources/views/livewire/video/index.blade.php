@@ -37,7 +37,7 @@
             </flux:button>
         </div>
 
-        <div class="w-full md:w-3/4">
+        <div class="w-full md:w-3/4 mt-4 lg:mt-0">
             <!-- Video List -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                 @foreach($videos as $video)

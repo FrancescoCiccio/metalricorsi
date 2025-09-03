@@ -39,7 +39,7 @@
         </div>
 
         <!-- Main Content -->
-        <div class="w-full md:w-3/4">
+        <div class="w-full md:w-3/4 mt-4 lg:mt-0">
             <!-- Search Input -->
             <div class="mb-4 flex justify-end">
                 <flux:input wire:model.live.debounce.300="search" kbd="⌘K" icon="magnifying-glass" placeholder="Cerca corsi..."/> 
@@ -54,7 +54,7 @@
                         <div class="p-6 flex items-start justify-start flex-col gap-y-2 h-full">
                             
                             <img 
-                                src="/storage/{{ $course->cover_path }}" 
+                                src="/storage/{{ $course->miniature_url }}" 
                                 class="rounded-md bg-gray-50 max-h-32 w-full object-cover" 
                                 alt="">
 
@@ -84,20 +84,24 @@
 
                             <!-- Buttons -->
                             <div class="flex flex-col w-full gap-y-2 items-center gap-x-2 justify-between">
-                                @if(Auth::check() && !in_array($course->id, $subscribedCourseIds))
-                                    <flux:button 
-                                        wire:click="subscribe({{ $course->id }})"
-                                        variant="primary" class="w-full cursor-pointer">
-                                        Iscriviti
-                                    </flux:button>
+
+                                @unless(now()->isAfter($course->when))
+
+                                    @if(Auth::check() && !in_array($course->id, $subscribedCourseIds))
+                                        <flux:button 
+                                            wire:click="subscribe({{ $course->id }})"
+                                            variant="primary" class="w-full cursor-pointer">
+                                            Iscriviti
+                                        </flux:button>
+                                    @else()
+                                        <flux:button 
+                                            disabled
+                                            variant="primary" class="w-full cursor-not-allowed">
+                                            Iscritto
+                                        </flux:button>                                
+                                    @endif
                                     
-                                @else()
-                                    <flux:button 
-                                        disabled
-                                        variant="primary" class="w-full cursor-not-allowed">
-                                        Iscritto
-                                    </flux:button>                                
-                                @endif
+                                @endunless
                                 
                                 <flux:button href="{{ route('courses.show', $course) }}" class="w-full">Approfondisci</flux:button>
                             </div>

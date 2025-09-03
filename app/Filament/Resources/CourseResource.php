@@ -43,11 +43,18 @@ class CourseResource extends Resource
                             ->rules('required')
                             ->columnSpanFull(),
 
+                        Forms\Components\FileUpload::make('miniature_url')
+                            ->label('Miniatura')
+                            ->directory('course-miniatures')
+                            ->image()
+                            ->columnSpan(2)
+                            ->rules('max:1024'),
+
                         Forms\Components\FileUpload::make('cover_path')
                             ->image()
-                            ->columnSpanFull()
-                            ->rules('max:2458')
-                            ->columnSpanFull(),
+                            ->directory('course-covers')
+                            ->columnSpan(2)
+                            ->rules('max:2458'),
 
                         Forms\Components\RichEditor::make('description')
                             ->columnSpanFull(),
@@ -67,6 +74,24 @@ class CourseResource extends Resource
                         Forms\Components\SpatieTagsInput::make('tags')
                             ->type('categories')
                             ->suggestions($courseTags)
+                            ->columnSpan(2),
+
+                        Forms\Components\TextInput::make('webinar_url')
+                            ->label('Webinar URL')
+                            ->suffixIcon('heroicon-o-link')
+                            ->placeholder('https://www...')
+                            ->columnSpanFull(),
+
+                        Forms\Components\TextInput::make('webinar_password')
+                            ->label('Webinar Password')
+                            ->suffixIcon('heroicon-o-lock-closed')
+                            ->placeholder('Password per accedere al webinar')
+                            ->columnSpan(2),
+
+                        Forms\Components\TextInput::make('webinar_id')
+                            ->label('Webinar ID')
+                            ->suffixIcon('heroicon-o-identification')
+                            ->placeholder('ID del webinar')
                             ->columnSpan(2),
 
                         Forms\Components\TextInput::make('youtube_embed')
