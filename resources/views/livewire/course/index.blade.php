@@ -78,7 +78,7 @@
                                     <path d="M12 6V12L16 14" class="stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>                                
                                 <span>
-                                     {{ $course->when->locale('it')->format('D M Y') }}
+                                     {{ $course->when->locale('it')->isoFormat('ddd MMM YYYY')  }}
                                 </span>
                             </p>
 
