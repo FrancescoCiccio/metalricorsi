@@ -23,7 +23,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
 }; ?>
 
 <div class="flex flex-col gap-6">
-    <x-auth-header :title="__('Forgot password')" :description="__('Inserisci la tua mail, per resettare la password')" />
+    <x-auth-header :title="__('Password dimenticata')" :description="__('Inserisci la tua mail, per resettare la password')" />
 
     <!-- Session Status -->
     <x-auth-session-status class="text-center" :status="session('status')" />
