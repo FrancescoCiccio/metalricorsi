@@ -42,9 +42,10 @@ class DownloadResource extends Resource
                 Forms\Components\FileUpload::make('file_path')
                     ->label('File')
                     ->required()
-                    ->disk('public') // Modifica il disco se necessario
+                    ->disk('public') // Modifica il disco se necessariogit
                     ->directory('downloads')
                     ->maxSize(36 * 1024) // 36 MB in KB
+                    ->rules(['max:36864']) // AGGIUNGI QUESTA RIGA
                     ->visibility('private'),
                 Forms\Components\RichEditor::make('description')
                     ->label('Descrizione')
