@@ -8,6 +8,7 @@ use App\Models\Course;
 use App\Models\Download;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+        Carbon::setLocale(config('app.locale'));
+
         Model::unguard();
 
         Model::preventLazyLoading(!app()->isProduction());

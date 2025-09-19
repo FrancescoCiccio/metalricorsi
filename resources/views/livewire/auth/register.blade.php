@@ -19,10 +19,18 @@ new #[Layout('components.layouts.auth')] class extends Component {
      */
     public function register(): void
     {
-        $validated = $this->validate([
+         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'name.required' => 'Il nome è obbligatorio.',
+            'name.max' => 'Il nome non può superare 255 caratteri.',
+            'email.required' => 'L\'email è obbligatoria.',
+            'email.email' => 'Inserisci un indirizzo email valido.',
+            'email.unique' => 'Questa email è già registrata.',
+            'password.required' => 'La password è obbligatoria.',
+            'password.confirmed' => 'La conferma password non corrisponde.',
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -45,7 +53,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
         <!-- Name -->
         <flux:input
             wire:model="name"
-            :label="__('Name')"
+            :label="__('Nome')"
             type="text"
             required
             autofocus
