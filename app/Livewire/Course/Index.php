@@ -56,7 +56,7 @@ class Index extends Component
 
     public function subscribe($courseId)
     {
-        /** @var App\Models\User */
+        /** @var \App\Models\User */
         $user = Auth::user();
 
         if ($user && !$user->courses()->where('courses.id', $courseId)->exists()) {

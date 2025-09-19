@@ -44,6 +44,7 @@ class DownloadResource extends Resource
                     ->required()
                     ->disk('public') // Modifica il disco se necessario
                     ->directory('downloads')
+                    ->maxSize(36 * 1024) // 36 MB in KB
                     ->visibility('private'),
                 Forms\Components\RichEditor::make('description')
                     ->label('Descrizione')

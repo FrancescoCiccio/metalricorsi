@@ -25,6 +25,8 @@ Route::get('/video', [VideoController::class, 'index'])->name('videos.index');
 
 Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
 Route::get('/courses/{course}', [CourseController::class, 'show'])->name('courses.show');
+Route::get('/courses/{course}/subscribe', [CourseController::class, 'subscribe'])->name('courses.subscribe');
+
 Route::get('/downloads', function () {
     return view('downloads.index');
 })->name('downloads.index');
