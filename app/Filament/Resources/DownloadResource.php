@@ -35,10 +35,18 @@ class DownloadResource extends Resource
         return $form
             ->schema([
                 //
+                Forms\Components\TextInput::make('order')
+                    ->label('Ordine')
+                    ->numeric()
+                    ->default(0)
+                    ->required()
+                    ->columnSpan(1),
+
                 Forms\Components\TextInput::make('title')
                     ->label('Titolo')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->columnSpan(3),
                 Forms\Components\FileUpload::make('file_path')
                     ->label('File')
                     ->required()
@@ -92,6 +100,8 @@ class DownloadResource extends Resource
                 Tables\Columns\SpatieTagsColumn::make('tags')
                     ->type('downloads')
             ])
+            ->reorderable('order')
+            ->defaultSort('order', 'asc')
             ->filters([
                 //
             ])

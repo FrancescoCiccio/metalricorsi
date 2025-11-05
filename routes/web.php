@@ -4,6 +4,7 @@ use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\DownloadController;
 
 Route::get('/', function () {
     return redirect()->route('dashboard');
@@ -27,8 +28,6 @@ Route::get('/courses', [CourseController::class, 'index'])->name('courses.index'
 Route::get('/courses/{course}', [CourseController::class, 'show'])->name('courses.show');
 Route::get('/courses/{course}/subscribe', [CourseController::class, 'subscribe'])->name('courses.subscribe');
 
-Route::get('/downloads', function () {
-    return view('downloads.index');
-})->name('downloads.index');
+Route::get('/downloads', [DownloadController::class, 'index'])->name('downloads.index');
 
 require __DIR__ . '/auth.php';

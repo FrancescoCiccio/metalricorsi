@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Video;
+use App\Models\Download;
 use Illuminate\Http\Request;
 
-class VideoController extends Controller
+class DownloadController extends Controller
 {
-    //
     public function index()
     {
-        return view('video.index');
+        return view('downloads.index');
     }
 }

@@ -38,10 +38,17 @@ class CourseResource extends Resource
                 //
                 Forms\Components\Grid::make(4)
                     ->schema([
+                        Forms\Components\TextInput::make('order')
+                            ->label('Ordine')
+                            ->numeric()
+                            ->default(0)
+                            ->required()
+                            ->columnSpan(1),
+
                         Forms\Components\TextInput::make('title')
                             ->required()
                             ->rules('required')
-                            ->columnSpanFull(),
+                            ->columnSpan(3),
 
                         Forms\Components\FileUpload::make('miniature_url')
                             ->label('Miniatura')
@@ -168,6 +175,8 @@ class CourseResource extends Resource
                     ->type('categories')
 
             ])
+            ->reorderable('order')
+            ->defaultSort('order', 'asc')
             ->filters([
                 //
             ])

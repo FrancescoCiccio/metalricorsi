@@ -29,10 +29,17 @@ class VideoResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('order')
+                    ->label('Ordine')
+                    ->numeric()
+                    ->default(0)
+                    ->required()
+                    ->columnSpan(1),
+
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->rules('required|string|max:255')
-                    ->columnSpanFull(),
+                    ->columnSpan(3),
 
                 Forms\Components\RichEditor::make('description')
                     ->columnSpanFull()
@@ -62,6 +69,8 @@ class VideoResource extends Resource
                     ->wrap(),
 
             ])
+            ->reorderable('order')
+            ->defaultSort('order', 'asc')
             ->filters([
                 //
             ])

@@ -12,10 +12,30 @@ class Download extends Model
     use HasFactory;
     use HasTags;
 
+    protected $fillable = [
+        'title',
+        'file_path',
+        'order',
+    ];
+
+    protected $casts = [
+        'order' => 'integer',
+    ];
+
     /**
-     * 
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::addGlobalScope('ordered', function ($query) {
+            $query->orderBy('order', 'asc');
+        });
+    }
+
+    /**
+     *
      * The user witch a Download is setted
-     * 
+     *
      */
     public function users(): BelongsToMany
     {
