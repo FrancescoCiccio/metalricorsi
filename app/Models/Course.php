@@ -6,12 +6,16 @@ use Spatie\Tags\HasTags;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\Translatable\HasTranslations;
 
 class Course extends Model
 {
 
     use HasFactory;
     use HasTags;
+    use HasTranslations;
+
+    public array $translatable = ['title', 'description'];
 
     protected $fillable = [
         'title',

@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Spatie\Tags\HasTags;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Video extends Model
 {
     use HasTags;
+    use HasTranslations;
+
+    public array $translatable = ['title', 'description'];
 
     protected $fillable = [
         'title',
