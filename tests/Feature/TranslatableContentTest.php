@@ -36,3 +36,15 @@ test('video e download sono traducibili con fallback', function () {
     expect($video->title)->toBe('Video ita')
         ->and($download->title)->toBe('Dispensa');
 });
+
+test('la descrizione di un download è mass-assignable e traducibile', function () {
+    $download = Download::create([
+        'title' => ['it' => 'Dispensa'],
+        'description' => ['it' => 'Contenuto', 'en' => 'Content'],
+        'file_path' => 'x.pdf',
+    ]);
+
+    app()->setLocale('en');
+
+    expect($download->fresh()->description)->toBe('Content');
+});

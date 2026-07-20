@@ -29,7 +29,8 @@ return new class extends Migration
                     $update = [];
                     foreach ($columns as $column) {
                         $value = $row->{$column};
-                        if ($value !== null && json_decode($value, true) === null) {
+                        $decoded = json_decode($value, true);
+                        if ($value !== null && ! is_array($decoded)) {
                             $update[$column] = json_encode(['it' => $value], JSON_UNESCAPED_UNICODE);
                         }
                     }
