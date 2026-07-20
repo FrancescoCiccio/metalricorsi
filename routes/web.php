@@ -5,10 +5,21 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\DownloadController;
+use App\Http\Middleware\SetLocale;
 
 Route::get('/', function () {
     return redirect()->route('dashboard');
 })->name('home');
+
+Route::post('language/{locale}', function (string $locale) {
+    abort_unless(in_array($locale, SetLocale::SUPPORTED, true), 404);
+
+    session(['locale' => $locale]);
+
+    request()->user()?->forceFill(['locale' => $locale])->save();
+
+    return back();
+})->name('language.update');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

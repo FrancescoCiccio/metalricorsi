@@ -43,3 +43,22 @@ test('una lingua non supportata in sessione ricade su it', function () {
 
     expect(app()->getLocale())->toBe('it');
 });
+
+test('il cambio lingua viene salvato in sessione per gli ospiti', function () {
+    $this->from('/login')->post('/language/en')->assertRedirect('/login');
+
+    expect(session('locale'))->toBe('en');
+});
+
+test('il cambio lingua viene salvato sull utente autenticato', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user)->post('/language/fr');
+
+    expect($user->fresh()->locale)->toBe('fr')
+        ->and(session('locale'))->toBe('fr');
+});
+
+test('una lingua non supportata restituisce 404', function () {
+    $this->post('/language/de')->assertNotFound();
+});
