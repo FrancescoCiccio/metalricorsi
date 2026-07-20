@@ -14,8 +14,9 @@ use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyEmailNotification;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 
-class User extends Authenticatable implements FilamentUser, CanResetPassword
+class User extends Authenticatable implements FilamentUser, CanResetPassword, HasLocalePreference
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasRoles, CanResetPasswordTrait;
@@ -29,6 +30,7 @@ class User extends Authenticatable implements FilamentUser, CanResetPassword
         'name',
         'email',
         'password',
+        'locale',
     ];
 
     /**
@@ -120,5 +122,13 @@ class User extends Authenticatable implements FilamentUser, CanResetPassword
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyEmailNotification);
+    }
+
+    /**
+     * The user's preferred locale, used to localize notifications.
+     */
+    public function preferredLocale(): string
+    {
+        return $this->locale ?? config('app.locale');
     }
 }

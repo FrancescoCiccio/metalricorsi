@@ -19,10 +19,14 @@ class UserObserver
             $user->groups()->attach($group->id);
         }
 
-        $admin = User::role('super_admin')->get();
+        try {
+            $admin = User::role('super_admin')->get();
 
-        foreach ($admin as $adminUser) {
-            $user->notify(new UserCreatedNotification($user, $adminUser));
+            foreach ($admin as $adminUser) {
+                $user->notify(new UserCreatedNotification($user, $adminUser));
+            }
+        } catch (\Exception $e) {
+            // Role doesn't exist, skip notification
         }
     }
 
