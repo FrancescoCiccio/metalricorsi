@@ -83,3 +83,35 @@ test('la ricerca video trova sia la lingua corrente sia l italiano', function ()
         ->set('search', 'montaggio')
         ->assertSee('Assembly video');
 });
+
+test('la ricerca esclude titoli presenti solo in una lingua diversa da quella corrente o italiano', function () {
+    $user = User::factory()->create(['locale' => 'en']);
+    $course = Course::create(['title' => ['fr' => 'Charpente metallique'], 'when' => now()->addDay()]);
+
+    $this->actingAs($user);
+    app()->setLocale('en');
+
+    // Non si può verificare l'esclusione tramite assertDontSee('Charpente metallique'):
+    // l'accessor traducibile restituisce stringa vuota per una lingua non tradotta e
+    // priva di fallback, quindi il titolo non comparirebbe mai in pagina a prescindere
+    // dalla query usata. Si verifica invece direttamente il risultato della query.
+    $component = Livewire::test(\App\Livewire\Course\Index::class)
+        ->set('search', 'Charpente');
+
+    expect($component->viewData('courses')->pluck('id'))->not->toContain($course->id);
+});
+
+test('la ricerca video esclude titoli presenti solo in una lingua diversa da quella corrente o italiano', function () {
+    $user = User::factory()->create(['locale' => 'en']);
+    $video = Video::create(['title' => ['fr' => 'Assemblage poutres']]);
+
+    $this->actingAs($user);
+    app()->setLocale('en');
+
+    // Stesso motivo del test analogo per Course: si verifica il risultato della query
+    // (assertDontSee non discriminerebbe, il titolo non tradotto è sempre vuoto).
+    $component = Livewire::test(\App\Livewire\Video\Index::class)
+        ->set('search', 'Assemblage');
+
+    expect($component->viewData('videos')->pluck('id'))->not->toContain($video->id);
+});
