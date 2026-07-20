@@ -14,9 +14,12 @@ use App\Filament\Resources\CourseResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CourseResource\RelationManagers;
 use App\Filament\Resources\CourseResource\RelationManagers\UsersRelationManager;
+use Filament\Resources\Concerns\Translatable;
 
 class CourseResource extends Resource
 {
+    use Translatable;
+
     protected static ?string $model = Course::class;
 
     protected static ?string $navigationGroup = 'Corsi';

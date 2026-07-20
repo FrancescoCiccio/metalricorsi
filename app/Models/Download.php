@@ -6,14 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Tags\HasTags;
+use Spatie\Translatable\HasTranslations;
 
 class Download extends Model
 {
     use HasFactory;
     use HasTags;
+    use HasTranslations;
+
+    public array $translatable = ['title', 'description'];
 
     protected $fillable = [
         'title',
+        'description',
         'file_path',
         'order',
     ];

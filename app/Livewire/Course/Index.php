@@ -71,12 +71,25 @@ class Index extends Component
         /** @var App\Models\User */
         $user = Auth::user();
 
+        $locale = app()->getLocale();
+
         $courses = Course::query()
-            ->when(!empty($this->selectedTags), function ($query) {
-                $query->withAnyTags($this->selectedTags, 'categories');
+            ->when(!empty($this->selectedTags), function ($query) use ($locale) {
+                $query->whereHas('tags', function ($q) use ($locale) {
+                    $q->where('type', 'categories')
+                        ->where(function ($q2) use ($locale) {
+                            foreach ($this->selectedTags as $name) {
+                                $q2->orWhere("name->{$locale}", $name)
+                                    ->orWhere('name->it', $name);
+                            }
+                        });
+                });
             })
-            ->when($this->search, function ($query) {
-                $query->where('title', 'like', '%' . $this->search . '%');
+            ->when($this->search, function ($query) use ($locale) {
+                $query->where(function ($q) use ($locale) {
+                    $q->where("title->{$locale}", 'like', '%' . $this->search . '%')
+                        ->orWhere('title->it', 'like', '%' . $this->search . '%');
+                });
             })
             ->with(['tags'])
             ->paginate(10);

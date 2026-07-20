@@ -35,8 +35,8 @@ class UserCreatedNotification extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('Ciao hai un nuovo utente registrato!')
-            ->action('Aggiungilo ai giusti gruppi!', url('/'))
+            ->line(__('Ciao hai un nuovo utente registrato!'))
+            ->action(__('Aggiungilo ai giusti gruppi!'), url('/'))
             ->line('Metal.Ri Academy');
     }
 

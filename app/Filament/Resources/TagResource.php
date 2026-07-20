@@ -14,9 +14,12 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\TagResource\RelationManagers;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Resources\Concerns\Translatable;
 
 class TagResource extends Resource
 {
+    use Translatable;
+
     protected static ?string $model = Tag::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -25,7 +28,9 @@ class TagResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->label('Nome')
+                    ->required(),
             ]);
     }
 

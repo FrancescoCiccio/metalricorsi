@@ -3,9 +3,9 @@
 <x-layouts.app :title="__('Dashboard')">
     <div class="">
         <div class="mb-12" id="bread">
-            <flux:button 
+            <flux:button
                 href="{{ route('courses.index') }}"
-                icon="arrow-long-left">Torna indietro</flux:button>
+                icon="arrow-long-left">{{ __('Torna indietro') }}</flux:button>
         </div>
         
     
@@ -23,7 +23,7 @@
                 <div class="bg-white flex gap-x-4 rounded-lg border-slate-200 border-2 p-6">
                     <div class="flex gap-x-2 items-center text-slate-500">
                         <span>
-                            {{ $course->when->format("D M Y H:i")}}
+                            {{ $course->when->locale(app()->getLocale())->isoFormat('ddd D MMM YYYY HH:mm') }}
                         </span>
                         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" class="stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -44,7 +44,7 @@
                                 </svg>
                                     
                                 <span>
-                                    Iscriviti
+                                    {{ __('Iscriviti') }}
                                 </span>
                             </a>
                         @else
@@ -52,7 +52,7 @@
                                 class="w-full bg-green-50 border-green-100 rounded-lg border-solid border p-2 text-sm font-semibold text-green-700 flex gap-x-2 items-center"
                                 >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-party-popper-icon lucide-party-popper"><path d="M5.8 11.3 2 22l10.7-3.79"/><path d="M4 3h.01"/><path d="M22 8h.01"/><path d="M15 2h.01"/><path d="M22 20h.01"/><path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10"/><path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17"/><path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7"/><path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z"/></svg>
-                                Risulti già iscritto a questo webinar
+                                {{ __('Risulti già iscritto a questo webinar') }}
                             </div>
                         @endif
                     @endunless
@@ -64,7 +64,7 @@
                     <img src="/storage/{{ $course->cover_path }}" alt="{{ $course->title }}" class="max-w-[80%] object-cover">
                 @else
                     <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-                        <span class="text-gray-500">No Image</span>
+                        <span class="text-gray-500">{{ __('No Image') }}</span>
                     </div>
                 @endif
 
@@ -79,7 +79,7 @@
         @if ($course->relators && count($course->relators) > 0)
             <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg mt-10">
                 <flux:heading size="lg" class="mb-4">
-                    Relatori
+                    {{ __('Relatori') }}
                 </flux:heading>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -90,7 +90,7 @@
                             @if (!empty($relator['bio']))
                                 <p class="text-gray-600 dark:text-gray-300">{{ $relator['bio'] }}</p>
                             @else
-                                <p class="text-gray-600 dark:text-gray-300">Nessuna biografia disponibile.</p>
+                                <p class="text-gray-600 dark:text-gray-300">{{ __('Nessuna biografia disponibile.') }}</p>
                             @endif
                         </div>
                     @endforeach
@@ -102,7 +102,7 @@
 
             <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg mt-10">
                 <flux:heading size="lg" class="mb-4">
-                    Risorse Aggiuntive
+                    {{ __('Risorse Aggiuntive') }}
                 </flux:heading>
 
                 <div class="flex gap-x-4 flex-wrap">

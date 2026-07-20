@@ -2,11 +2,11 @@
 
     <div>
         <flux:heading size="xl">
-             I tuoi materiali disponibili al download
+             {{ __('I tuoi materiali disponibili al download') }}
         </flux:heading>
 
         <flux:subheading size="lg" class="mt-2 max-w-2xl">
-            In questa sezione trovi tutti i materiali a te riservati: dispense, guide, risorse extra. Puoi filtrare per categoria per trovare più velocemente ciò che ti serve.        
+            {{ __('In questa sezione trovi tutti i materiali a te riservati: dispense, guide, risorse extra. Puoi filtrare per categoria per trovare più velocemente ciò che ti serve.') }}
         </flux:subheading>
     </div>
 
@@ -15,7 +15,7 @@
         {{-- Sidebar --}}
         <div class="w-full md:w-1/4 rounded-lg">
             <flux:heading size="lg" class="mb-4">
-                Filtra per Categoria
+                {{ __('Filtra per Categoria') }}
             </flux:heading>
 
             <div class="space-y-2 text-gray-700 mb-8">
@@ -33,7 +33,7 @@
             </div>
 
             <flux:button wire:click="resetFilters" class="w-full">
-                Resetta filtri
+                {{ __('Resetta filtri') }}
             </flux:button>
         </div>
         {{-- END Sidebar --}}
@@ -41,7 +41,7 @@
         {{-- Main Content --}}
         <div class="w-full md:w-3/4 mt-4 lg:mt-0">
             @if($downloads->isEmpty())
-                <p class="text-gray-600 text-sm">Nessun download disponibile.</p>
+                <p class="text-gray-600 text-sm">{{ __('Nessun download disponibile.') }}</p>
             @else
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     @foreach($downloads as $download)
@@ -64,7 +64,7 @@
                                 <flux:button 
                                     variant="primary"
                                     icon="arrow-down-tray"
-                                    href="/storage/{{ $download->file_path }}" target="_blank" class="w-full">Scarica</flux:button>
+                                    href="/storage/{{ $download->file_path }}" target="_blank" class="w-full">{{ __('Scarica') }}</flux:button>
                             </div>
                         </div>
                     @endforeach

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\SetLocale;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -9,6 +10,7 @@ use Livewire\Volt\Component;
 new class extends Component {
     public string $name = '';
     public string $email = '';
+    public string $locale = 'it';
 
     /**
      * Mount the component.
@@ -17,6 +19,7 @@ new class extends Component {
     {
         $this->name = Auth::user()->name;
         $this->email = Auth::user()->email;
+        $this->locale = Auth::user()->locale ?? app()->getLocale();
     }
 
     /**
@@ -37,6 +40,8 @@ new class extends Component {
                 'max:255',
                 Rule::unique(User::class)->ignore($user->id)
             ],
+
+            'locale' => ['required', 'string', Rule::in(SetLocale::SUPPORTED)],
         ]);
 
         $user->fill($validated);
@@ -46,6 +51,8 @@ new class extends Component {
         }
 
         $user->save();
+
+        session(['locale' => $this->locale]);
 
         $this->dispatch('profile-updated', name: $user->name);
     }
@@ -97,6 +104,12 @@ new class extends Component {
                     </div>
                 @endif
             </div>
+
+            <flux:select wire:model="locale" :label="__('Lingua')">
+                <flux:select.option value="it">Italiano</flux:select.option>
+                <flux:select.option value="en">English</flux:select.option>
+                <flux:select.option value="fr">Français</flux:select.option>
+            </flux:select>
 
             <div class="flex items-center gap-4">
                 <div class="flex items-center justify-end">
