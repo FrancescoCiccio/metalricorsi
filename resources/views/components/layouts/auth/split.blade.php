@@ -33,6 +33,11 @@
 
                         <span class="sr-only">{{ config('app.name', 'Laravel') }}</span>
                     </a>
+
+                    <div class="flex justify-end">
+                        <x-language-switcher />
+                    </div>
+
                     {{ $slot }}
                 </div>
             </div>

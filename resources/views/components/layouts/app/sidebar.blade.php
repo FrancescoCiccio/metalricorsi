@@ -23,6 +23,8 @@
 
             <flux:spacer />
 
+            <x-language-switcher />
+
             <flux:navlist variant="outline">
                 <flux:navlist.item icon="globe-europe-africa" href="https://metalri.it" target="_blank">
                 {{ __('Torna al sito web') }}

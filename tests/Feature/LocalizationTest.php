@@ -62,3 +62,19 @@ test('il cambio lingua viene salvato sull utente autenticato', function () {
 test('una lingua non supportata restituisce 404', function () {
     $this->post('/language/de')->assertNotFound();
 });
+
+test('la sidebar mostra lo switcher lingua', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user)->get('/dashboard')
+        ->assertSee('Italiano')
+        ->assertSee('English')
+        ->assertSee('Français');
+});
+
+test('la pagina di login mostra lo switcher lingua', function () {
+    $this->get('/login')
+        ->assertSee('Italiano')
+        ->assertSee('English')
+        ->assertSee('Français');
+});
