@@ -95,3 +95,11 @@ test('la pagina download è tradotta in francese per un utente francese', functi
     $this->actingAs($user)->get('/downloads')
         ->assertSee('Filtrer par catégorie');
 });
+
+test('i messaggi di validazione sono tradotti in francese', function () {
+    app()->setLocale('fr');
+
+    expect(__('validation.required', ['attribute' => 'email']))
+        ->not->toBe('validation.required')
+        ->toContain('obligatoire');
+});
