@@ -78,3 +78,20 @@ test('la pagina di login mostra lo switcher lingua', function () {
         ->assertSee('English')
         ->assertSee('Français');
 });
+
+test('la pagina corsi è tradotta in inglese per un utente inglese', function () {
+    $user = User::factory()->create(['locale' => 'en']);
+
+    $this->actingAs($user)->get('/courses')
+        ->assertSee('Filter by Category')
+        ->assertSee('Metal.Ri Courses')
+        ->assertSee('was created to promote')
+        ->assertDontSee('Metal.Ri Academy nasce con');
+});
+
+test('la pagina download è tradotta in francese per un utente francese', function () {
+    $user = User::factory()->create(['locale' => 'fr']);
+
+    $this->actingAs($user)->get('/downloads')
+        ->assertSee('Filtrer par catégorie');
+});

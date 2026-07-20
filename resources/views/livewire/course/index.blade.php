@@ -1,10 +1,10 @@
 <div class="w-full">
     <div class="">
         
-        <flux:heading size="xl">I Corsi di Metal.Ri</flux:heading>
+        <flux:heading size="xl">{{ __('I Corsi di Metal.Ri') }}</flux:heading>
 
         <flux:subheading size="lg" class="mt-2 max-w-2xl">
-            Metal.Ri Academy nasce con l’obiettivo di promuovere la diffusione delle nuove tecnologie costruttive nell’ottica della prefabbricazione edilizia e dell’industrializzazione del cantiere, organizzando webinar, seminari e convegni finalizzati all’aggiornamento continuo delle conoscenze professionali, scientifiche e tecniche di coloro i quali operano nel campo delle costruzioni.
+            {{ __('Metal.Ri Academy nasce con l’obiettivo di promuovere la diffusione delle nuove tecnologie costruttive nell’ottica della prefabbricazione edilizia e dell’industrializzazione del cantiere, organizzando webinar, seminari e convegni finalizzati all’aggiornamento continuo delle conoscenze professionali, scientifiche e tecniche di coloro i quali operano nel campo delle costruzioni.') }}
         </flux:subheading>
     </div>
     <div class="mt-10 flex gap-x-4 items-start p-2 lg:p-0 flex-wrap lg:flex-nowrap">
@@ -12,7 +12,7 @@
         <div class="w-full md:w-1/4  rounded-lg">
 
             <flux:heading size="lg" class="mb-4">
-                Filtra per Categoria
+                {{ __('Filtra per Categoria') }}
             </flux:heading>
 
                         
@@ -32,9 +32,9 @@
                 @endforeach
             </div>
 
-            <flux:button 
+            <flux:button
                 class="w-full">
-                Resetta filtri
+                {{ __('Resetta filtri') }}
             </flux:button>
         </div>
 
@@ -42,7 +42,7 @@
         <div class="w-full md:w-3/4 mt-4 lg:mt-0">
             <!-- Search Input -->
             <div class="mb-4 flex justify-end">
-                <flux:input wire:model.live.debounce.300="search" kbd="⌘K" icon="magnifying-glass" placeholder="Cerca corsi..."/> 
+                <flux:input wire:model.live.debounce.300="search" kbd="⌘K" icon="magnifying-glass" :placeholder="__('Cerca corsi...')"/>
             </div>
 
             <!-- Courses List -->
@@ -78,7 +78,7 @@
                                     <path d="M12 6V12L16 14" class="stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>                                
                                 <span>
-                                     {{ $course->when->locale('it')->isoFormat('ddd MMM YYYY')  }}
+                                     {{ $course->when->locale(app()->getLocale())->isoFormat('ddd MMM YYYY')  }}
                                 </span>
                             </p>
 
@@ -88,22 +88,22 @@
                                 @unless(now()->isAfter($course->when))
 
                                     @if(Auth::check() && !in_array($course->id, $subscribedCourseIds))
-                                        <flux:button 
+                                        <flux:button
                                             wire:click="subscribe({{ $course->id }})"
                                             variant="primary" class="w-full cursor-pointer">
-                                            Iscriviti
+                                            {{ __('Iscriviti') }}
                                         </flux:button>
                                     @else()
-                                        <flux:button 
+                                        <flux:button
                                             disabled
                                             variant="primary" class="w-full cursor-not-allowed">
-                                            Iscritto
-                                        </flux:button>                                
+                                            {{ __('Iscritto') }}
+                                        </flux:button>
                                     @endif
-                                    
+
                                 @endunless
-                                
-                                <flux:button href="{{ route('courses.show', $course) }}" class="w-full">Approfondisci</flux:button>
+
+                                <flux:button href="{{ route('courses.show', $course) }}" class="w-full">{{ __('Approfondisci') }}</flux:button>
                             </div>
                         </div>
                     </div>

@@ -2,7 +2,7 @@
     {{-- Do your work, then step back. --}}
     <div>
         <flux:heading size="xl">
-            Raccolta di video
+            {{ __('Raccolta di video') }}
         </flux:heading>
     </div>
 
@@ -11,7 +11,7 @@
         <div class="w-full md:w-1/4  rounded-lg">
 
             <flux:heading size="lg" class="mb-4">
-                Filtra per Categoria
+                {{ __('Filtra per Categoria') }}
             </flux:heading>
 
                         
@@ -31,9 +31,9 @@
                 @endforeach
             </div>
 
-            <flux:button 
+            <flux:button
                 class="w-full">
-                Resetta filtri
+                {{ __('Resetta filtri') }}
             </flux:button>
         </div>
 

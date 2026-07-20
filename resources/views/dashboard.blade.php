@@ -6,7 +6,7 @@
                 <div class="hover:bg-zinc-50 dark:hover:bg-zinc-700 p-5 h-full flex flex-col justify-end">
                     <div>
                         <h2 class="font-semibold mb-8">
-                            Ciao e bentrovato
+                            {{ __('Ciao e bentrovato') }}
                         </h2>
                     </div>
                     <flux:dropdown position="bottom" align="start">
@@ -65,11 +65,11 @@
                     </h1>
 
                     <flux:subheading class="mb-2">
-                        Totale Download disponibili sulla piattaforma
+                        {{ __('Totale Download disponibili sulla piattaforma') }}
                     </flux:subheading>
 
                     <flux:button :href="route('downloads.index')" variant="primary" class="mt-4 w-max" wire:navigate>
-                        Vai i Download
+                        {{ __('Vai i Download') }}
                     </flux:button>
                 </div>
             </div>
@@ -82,11 +82,11 @@
                     </h1>
 
                     <flux:subheading class="mb-2">
-                        Corsi pubblicati sulla piattaforma
+                        {{ __('Corsi pubblicati sulla piattaforma') }}
                     </flux:subheading>
 
                     <flux:button :href="route('courses.index')" variant="primary" class="mt-4 w-max" wire:navigate>
-                        Vai ai Corsi
+                        {{ __('Vai ai Corsi') }}
                     </flux:button>
                 </div>
             </div>
