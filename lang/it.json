@@ -21,5 +21,9 @@
     "Please verify your email address by clicking on the link we just emailed to you.": "Verifica il tuo indirizzo email cliccando sul link che ti abbiamo appena inviato.",
     "Please enter your new password below": "Inserisci qui sotto la tua nuova password",
     "This is a secure area of the application. Please confirm your password before continuing.": "Questa è un'area protetta dell'applicazione. Conferma la tua password prima di continuare.",
-    "No Image": "Nessuna immagine"
+    "No Image": "Nessuna immagine",
+    "Dashboard": "Dashboard",
+    "Email": "Email",
+    "Password": "Password",
+    "Repository": "Repository"
 }
