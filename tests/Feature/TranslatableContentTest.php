@@ -3,6 +3,8 @@
 use App\Models\Course;
 use App\Models\Download;
 use App\Models\Video;
+use App\Models\User;
+use Livewire\Livewire;
 
 test('un contenuto tradotto mostra la lingua corrente', function () {
     $course = Course::create([
@@ -47,4 +49,37 @@ test('la descrizione di un download è mass-assignable e traducibile', function 
     app()->setLocale('en');
 
     expect($download->fresh()->description)->toBe('Content');
+});
+
+test('la ricerca corsi trova sia la lingua corrente sia l italiano', function () {
+    $user = User::factory()->create(['locale' => 'en']);
+    Course::create(['title' => ['it' => 'Corso saldatura', 'en' => 'Welding course'], 'when' => now()->addDay()]);
+    Course::create(['title' => ['it' => 'Corso bullonatura'], 'when' => now()->addDay()]);
+
+    $this->actingAs($user);
+    app()->setLocale('en');
+
+    Livewire::test(\App\Livewire\Course\Index::class)
+        ->set('search', 'Welding')
+        ->assertSee('Welding course');
+
+    Livewire::test(\App\Livewire\Course\Index::class)
+        ->set('search', 'bullonatura')
+        ->assertSee('Corso bullonatura');
+});
+
+test('la ricerca video trova sia la lingua corrente sia l italiano', function () {
+    $user = User::factory()->create(['locale' => 'en']);
+    Video::create(['title' => ['it' => 'Video montaggio', 'en' => 'Assembly video']]);
+
+    $this->actingAs($user);
+    app()->setLocale('en');
+
+    Livewire::test(\App\Livewire\Video\Index::class)
+        ->set('search', 'Assembly')
+        ->assertSee('Assembly video');
+
+    Livewire::test(\App\Livewire\Video\Index::class)
+        ->set('search', 'montaggio')
+        ->assertSee('Assembly video');
 });
