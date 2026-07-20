@@ -73,3 +73,18 @@ test('correct password must be provided to delete account', function () {
 
     expect($user->fresh())->not->toBeNull();
 });
+
+test('user can update locale from profile settings', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user);
+
+    Volt::test('settings.profile')
+        ->set('name', $user->name)
+        ->set('email', $user->email)
+        ->set('locale', 'en')
+        ->call('updateProfileInformation');
+
+    expect($user->fresh()->locale)->toBe('en')
+        ->and(session('locale'))->toBe('en');
+});
