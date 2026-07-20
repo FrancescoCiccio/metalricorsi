@@ -44,6 +44,7 @@ return new class extends Migration
 
     public function down(): void
     {
+        // Keeps only 'it' translation; en/fr discarded (intentional lossy reverse of forward-only data migration)
         foreach ($this->tables as $table => $columns) {
             DB::table($table)->orderBy('id')->chunkById(100, function ($rows) use ($table, $columns) {
                 foreach ($rows as $row) {

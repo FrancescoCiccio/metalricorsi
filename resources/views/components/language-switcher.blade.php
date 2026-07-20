@@ -1,5 +1,5 @@
 <flux:dropdown position="top" align="start">
-    <flux:button variant="subtle" size="sm" icon="language">
+    <flux:button variant="subtle" size="sm" icon="language" aria-label="{{ __('Cambia lingua') }}">
         {{ strtoupper(app()->getLocale()) }}
     </flux:button>
 
