@@ -13,9 +13,12 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\DownloadResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\DownloadResource\RelationManagers;
+use Filament\Resources\Concerns\Translatable;
 
 class DownloadResource extends Resource
 {
+    use Translatable;
+
     protected static ?string $model = Download::class;
 
     protected static ?string $modalLabel = 'File';

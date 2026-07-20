@@ -8,5 +8,14 @@ use Filament\Resources\Pages\CreateRecord;
 
 class CreateVideo extends CreateRecord
 {
+    use CreateRecord\Concerns\Translatable;
+
     protected static string $resource = VideoResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\LocaleSwitcher::make(),
+        ];
+    }
 }

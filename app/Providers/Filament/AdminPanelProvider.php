@@ -54,7 +54,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentShieldPlugin::make(),
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+                \Filament\SpatieLaravelTranslatablePlugin::make()
+                    ->defaultLocales(['it', 'en', 'fr']),
             ])
             ->colors([
                 'primary' => '#004165',
