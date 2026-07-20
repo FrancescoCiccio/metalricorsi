@@ -37,16 +37,16 @@ class CourseJoinedNotification extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Iscrizione Confermata - ' . $this->course->title) // Oggetto personalizzato
-            ->greeting("Ciao {$this->user->name}!") // Saluto personalizzato
-            ->line("Ti sei iscritto al corso: {$this->course->title}")
-            ->line("Si terrà il giorno: {$this->course->when->format('d/m/Y H:i')}")
-            ->action('Accedi al webinar', url($this->course->webinar_url))
-            ->line('Grazie per esserti iscritto!')
-            ->line('Nel caso in cui fosse richiesto')
-            ->line("la password per accedere al webinar è: " . $this->course->webinar_password ?? 'Non specificata')
-            ->line('L\'ID del webinar è: ' . ($this->course->webinar_id ?? 'Non specificato'))
-            ->salutation('Cordiali saluti, Il Team'); // Saluto finale personalizzato
+            ->subject(__('Iscrizione Confermata - :title', ['title' => $this->course->title]))
+            ->greeting(__('Ciao :name!', ['name' => $this->user->name]))
+            ->line(__('Ti sei iscritto al corso: :title', ['title' => $this->course->title]))
+            ->line(__('Si terrà il giorno: :date', ['date' => $this->course->when->format('d/m/Y H:i')]))
+            ->action(__('Accedi al webinar'), url($this->course->webinar_url))
+            ->line(__('Grazie per esserti iscritto!'))
+            ->line(__('Nel caso in cui fosse richiesto'))
+            ->line(__('La password per accedere al webinar è: :password', ['password' => $this->course->webinar_password ?? __('Non specificata')]))
+            ->line(__('L\'ID del webinar è: :id', ['id' => $this->course->webinar_id ?? __('Non specificato')]))
+            ->salutation(__('Cordiali saluti, Il Team'));
 
     }
 

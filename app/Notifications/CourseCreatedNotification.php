@@ -37,8 +37,8 @@ class CourseCreatedNotification extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line("Ciao un nuovo corso è online: {$this->course->title}")
-            ->action('Dai un occhio', route('courses.show', $this->course->id));
+            ->line(__('Ciao, un nuovo corso è online: :title', ['title' => $this->course->title]))
+            ->action(__('Dai un occhio'), route('courses.show', $this->course->id));
     }
 
     /**

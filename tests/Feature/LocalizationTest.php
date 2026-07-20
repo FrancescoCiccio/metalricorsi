@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Course;
 use App\Models\User;
+use App\Notifications\CourseCreatedNotification;
+use App\Notifications\CourseJoinedNotification;
 
 test('preferredLocale ritorna it quando l utente non ha scelto una lingua', function () {
     $user = User::factory()->create();
@@ -102,4 +105,25 @@ test('i messaggi di validazione sono tradotti in francese', function () {
     expect(__('validation.required', ['attribute' => 'email']))
         ->not->toBe('validation.required')
         ->toContain('obligatoire');
+});
+
+test('la mail nuovo corso è tradotta secondo il locale attivo', function () {
+    $course = Course::create(['title' => ['it' => 'Corso saldatura', 'fr' => 'Formation soudage'], 'when' => now()->addDay()]);
+    $user = User::factory()->create(['locale' => 'fr']);
+
+    app()->setLocale('fr');
+    $mail = (new CourseCreatedNotification($course))->toMail($user);
+
+    expect($mail->introLines[0])->toContain('Formation soudage')
+        ->and($mail->introLines[0])->toContain('Bonjour');
+});
+
+test('la mail iscrizione corso è tradotta secondo il locale attivo', function () {
+    $course = Course::create(['title' => ['it' => 'Corso saldatura', 'en' => 'Welding course'], 'when' => now()->addDay(), 'webinar_url' => 'https://example.com']);
+    $user = User::factory()->create(['locale' => 'en']);
+
+    app()->setLocale('en');
+    $mail = (new CourseJoinedNotification($course, $user))->toMail($user);
+
+    expect($mail->subject)->toBe('Registration Confirmed - Welding course');
 });

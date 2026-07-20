@@ -47,11 +47,11 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
         ], false));
 
         return (new MailMessage)
-            ->subject('Reimpostazione Password')
-            ->line('Hai ricevuto questa email perché abbiamo ricevuto una richiesta di reimpostazione password per il tuo account.')
-            ->action('Reimposta Password', $url)
-            ->line('Questo link di reimpostazione password scadrà tra 60 minuti.')
-            ->line('Se non hai richiesto tu la reimpostazione della password, non è necessaria alcuna azione.');
+            ->subject(__('Reimpostazione Password'))
+            ->line(__('Hai ricevuto questa email perché abbiamo ricevuto una richiesta di reimpostazione password per il tuo account.'))
+            ->action(__('Reimposta Password'), $url)
+            ->line(__('Questo link di reimpostazione password scadrà tra 60 minuti.'))
+            ->line(__('Se non hai richiesto tu la reimpostazione della password, non è necessaria alcuna azione.'));
     }
 
     /**

@@ -36,8 +36,8 @@ class DownloadAviableNotification extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('Ciao un nuovo download è disponibile: ' . $this->download->title)
-            ->action('Dai un occhio ai tuoi download', route('downloads.index'));
+            ->line(__('Ciao, un nuovo download è disponibile: :title', ['title' => $this->download->title]))
+            ->action(__('Dai un occhio ai tuoi download'), route('downloads.index'));
     }
 
     /**
