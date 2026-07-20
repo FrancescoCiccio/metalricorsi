@@ -13,3 +13,7 @@ test('preferredLocale ritorna la lingua scelta dall utente', function () {
 
     expect($user->preferredLocale())->toBe('fr');
 });
+
+test('la creazione di un utente non fallisce se manca il ruolo super_admin', function () {
+    expect(fn () => User::factory()->create())->not->toThrow(Exception::class);
+});
