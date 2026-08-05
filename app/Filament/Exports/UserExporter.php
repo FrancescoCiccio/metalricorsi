@@ -16,6 +16,10 @@ class UserExporter extends Exporter
         return [
             ExportColumn::make('name'),
             ExportColumn::make('email'),
+            ExportColumn::make('created_at')
+                ->label('Iscritto il'),
+            ExportColumn::make('last_login_at')
+                ->label('Ultimo accesso'),
         ];
     }
 

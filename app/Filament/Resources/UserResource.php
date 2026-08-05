@@ -71,6 +71,17 @@ class UserResource extends Resource
 
                 Tables\Columns\TextColumn::make('groups.title')
                     ->label('Gruppi'),
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Iscritto il')
+                    ->dateTime('d/m/Y H:i')
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('last_login_at')
+                    ->label('Ultimo accesso')
+                    ->dateTime('d/m/Y H:i')
+                    ->sortable()
+                    ->placeholder('Mai'),
             ])
             ->filters([
                 //
