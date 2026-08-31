@@ -1,7 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(php artisan:*)"
+      "Bash(php artisan:*)",
+      "Bash(php *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git checkout *)",
+      "Bash(git merge --no-ff feature/multilingua -m 'Merge feature/multilingua: piattaforma multilingua IT/EN/FR *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(ssh *)",
+      "Bash(scp forge@188.245.106.85:'~/agribox.on-forge.com/public/wp-content/themes/agriboxhtml/woocommerce/checkout/form-checkout.php' form-checkout.php)",
+      "Bash(scp wc-notices.css forge@188.245.106.85:'~/agribox.on-forge.com/public/wp-content/themes/agriboxhtml/assets/css/wc-notices.css')"
     ],
     "deny": [],
     "ask": []

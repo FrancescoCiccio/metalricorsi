@@ -17,6 +17,10 @@
                     [$message, $author] = str(Illuminate\Foundation\Inspiring::quotes()->random())->explode('-');
                 @endphp
 
+                <h1 class="relative z-20 my-auto max-w-2xl text-4xl font-bold leading-[1.1] tracking-tight text-balance text-white xl:text-5xl 2xl:text-6xl">
+                    {{ __('Consulta e scarica tutti i contenuti tecnici MTR® dedicati a progettisti e imprese.') }}
+                </h1>
+
                 <div class="relative z-20 mt-auto">
                     {{-- <blockquote class="space-y-2">
                         <flux:heading size="lg">&ldquo;{{ trim($message) }}&rdquo;</flux:heading>
