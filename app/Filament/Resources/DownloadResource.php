@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Tables;
 use Spatie\Tags\Tag;
 use App\Models\Download;
+use App\Support\SafeUploads;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
@@ -53,10 +54,11 @@ class DownloadResource extends Resource
                 Forms\Components\FileUpload::make('file_path')
                     ->label('File')
                     ->required()
-                    ->disk('public') // Modifica il disco se necessariogit
+                    ->disk('public')
                     ->directory('downloads')
                     ->maxSize(36 * 1024) // 36 MB in KB
-                    ->rules(['max:36864']) // AGGIUNGI QUESTA RIGA
+                    ->acceptedFileTypes(SafeUploads::DOCUMENT_MIMES)
+                    ->rules(SafeUploads::documentRules(36 * 1024))
                     ->visibility('private'),
                 Forms\Components\RichEditor::make('description')
                     ->label('Descrizione')

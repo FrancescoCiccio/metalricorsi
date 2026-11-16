@@ -9,6 +9,9 @@ use App\Models\Download;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Carbon\Carbon;
+use App\Support\SafeUploads;
+use Filament\Forms\Components\FileUpload;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -39,5 +42,14 @@ class AppServiceProvider extends ServiceProvider
         Download::observe(\App\Observers\DownloadObserver::class);
 
         Video::observe(\App\Observers\VideoObserver::class);
+
+        Validator::extend('safe_filename', fn ($attribute, $value) => ! SafeUploads::isDangerous($value), 'Tipo di file non consentito.');
+
+        // Safety net for every Filament upload, including fields added in the future.
+        FileUpload::configureUsing(function (FileUpload $upload): void {
+            $upload
+                ->preserveFilenames(false)
+                ->rule(SafeUploads::blockDangerousNames());
+        });
     }
 }

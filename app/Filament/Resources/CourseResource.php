@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Tables;
 use Spatie\Tags\Tag;
 use App\Models\Course;
+use App\Support\SafeUploads;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
@@ -57,14 +58,16 @@ class CourseResource extends Resource
                             ->label('Miniatura')
                             ->directory('course-miniatures')
                             ->image()
+                            ->acceptedFileTypes(SafeUploads::IMAGE_MIMES)
                             ->columnSpan(2)
-                            ->rules('max:1024'),
+                            ->rules(SafeUploads::imageRules(1024)),
 
                         Forms\Components\FileUpload::make('cover_path')
                             ->image()
+                            ->acceptedFileTypes(SafeUploads::IMAGE_MIMES)
                             ->directory('course-covers')
                             ->columnSpan(2)
-                            ->rules('max:2458'),
+                            ->rules(SafeUploads::imageRules(2458)),
 
                         Forms\Components\RichEditor::make('description')
                             ->columnSpanFull(),
@@ -125,7 +128,8 @@ class CourseResource extends Resource
                                         Forms\Components\FileUpload::make('file_path')
                                             ->label('Carica File')
                                             ->required()
-                                            ->rules('required|file|max:5120'),
+                                            ->acceptedFileTypes(SafeUploads::DOCUMENT_MIMES)
+                                            ->rules(SafeUploads::documentRules(5120)),
                                     ])
                             ])
                             ->columnSpanFull(),
@@ -141,7 +145,8 @@ class CourseResource extends Resource
                                         Forms\Components\FileUpload::make('photo')
                                             ->label('Foto Relatore')
                                             ->image()
-                                            ->rules('nullable|image|max:1024')
+                                            ->acceptedFileTypes(SafeUploads::IMAGE_MIMES)
+                                            ->rules(SafeUploads::imageRules(1024))
                                             ->columnSpanFull(),
 
                                         Forms\Components\TextInput::make('name')

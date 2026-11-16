@@ -65,9 +65,11 @@ return [
 
     'temporary_file_upload' => [
         'disk' => null,        // Example: 'local', 's3'              | Default: 'default'
-        'rules' => ['max:36864'], // ← Cambia in max:36864
+        // Only accept the file types used by the admin forms (see App\Support\SafeUploads).
+        'rules' => \App\Support\SafeUploads::temporaryUploadRules(36 * 1024),
         'directory' => null,   // Example: 'tmp'                      | Default: 'livewire-tmp'
-        'middleware' => null,  // Example: 'throttle:5,1'             | Default: 'throttle:60,1'
+        // Uploads are only used in the admin panel: require a logged-in user and limit the rate.
+        'middleware' => ['auth', 'throttle:20,1'],
         'preview_mimes' => [   // Supported file types for temporary pre-signed file URLs...
             'png',
             'gif',
